@@ -11,6 +11,9 @@ Un projet éducatif pour explorer les concepts de sécurité web et d'authentifi
 
 Ce projet a été créé pour approfondir ma compréhension de Next.js et des principes essentiels de la sécurité web moderne. L'application implémente un système d'authentification robuste avec plusieurs couches de protection.
 
+### 🌐 Déploiement
+L'application est déployée et accessible à l'adresse : [https://moha-df-auth.vercel.app/](https://moha-df-auth.vercel.app/)
+
 ### ✨ Fonctionnalités principales
 
 - **Authentification sécurisée** - Système complet basé sur bcrypt et tokens
