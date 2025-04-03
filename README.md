@@ -5,126 +5,126 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![bcrypt](https://img.shields.io/badge/bcrypt-5.1+-525252?style=for-the-badge)
 
-Un projet éducatif pour explorer les concepts de sécurité web et d'authentification avec Next.js. Cette application démontre les pratiques fondamentales de sécurité pour les développeurs React/Next.js.
+An educational project to explore web security concepts and authentication with Next.js. This application demonstrates fundamental security practices for React/Next.js developers.
 
-## 📋 Vue d'ensemble
+## 📋 Overview
 
-Ce projet a été créé pour approfondir ma compréhension de Next.js et des principes essentiels de la sécurité web moderne. L'application implémente un système d'authentification robuste avec plusieurs couches de protection.
+This project was created to deepen my understanding of Next.js and essential principles of modern web security. The application implements a robust authentication system with multiple layers of protection.
 
-### 🌐 Déploiement
-L'application est déployée et accessible à l'adresse : [https://moha-df-auth.vercel.app/](https://moha-df-auth.vercel.app/)
+### 🌐 Deployment
+The application is deployed and accessible at: [https://moha-df-auth.vercel.app/](https://moha-df-auth.vercel.app/)
 
-### ✨ Fonctionnalités principales
+### ✨ Main Features
 
-- **Authentification sécurisée** - Système complet basé sur bcrypt et tokens
-- **Protection contre les attaques** - Mécanismes de rate limiting et blocage temporaire 
-- **Gestion sécurisée des sessions** - Utilisation de cookies httpOnly et sameSite
-- **Middleware de protection** - Sécurisation des routes et redirections intelligentes
-- **UI adaptative** - Interface simple et responsive
+- **Secure Authentication** - Complete system based on bcrypt and tokens
+- **Attack Protection** - Rate limiting mechanisms and temporary blocking
+- **Secure Session Management** - Use of httpOnly and sameSite cookies
+- **Protection Middleware** - Route security and smart redirects
+- **Adaptive UI** - Simple and responsive interface
 
-## 🛠️ Technologies utilisées
+## 🛠️ Technologies Used
 
-- **Next.js** - Framework React pour le rendu côté serveur et les API Routes
-- **TypeScript** - Pour un typage statique et une meilleure maintenabilité
-- **Tailwind CSS** - Pour un styling rapide et responsive
-- **bcrypt** - Pour le hachage sécurisé des mots de passe
-- **crypto** - Pour la génération de tokens d'authentification
+- **Next.js** - React framework for server-side rendering and API Routes
+- **TypeScript** - For static typing and better maintainability
+- **Tailwind CSS** - For quick and responsive styling
+- **bcrypt** - For secure password hashing
+- **crypto** - For authentication token generation
 
-## 🏗️ Architecture du projet
+## 🏗️ Project Architecture
 
 ```
 password/
 ├── src/
 │   ├── app/
 │   │   ├── api/
-│   │   │   └── auth/       # Endpoint d'authentification sécurisé
-│   │   ├── accueil/        # Zone protégée de l'application
-│   │   └── login-page.tsx  # Interface de connexion
-│   └── middleware.ts       # Protection des routes et vérification des tokens
+│   │   │   └── auth/       # Secure authentication endpoint
+│   │   ├── accueil/        # Protected area of the application
+│   │   └── login-page.tsx  # Login interface
+│   └── middleware.ts       # Route protection and token verification
 ├── utils/
-│   └── auth.ts             # Fonctions et helpers d'authentification
-├── .env.local              # Variables d'environnement (non versionné)
-├── generate-hash.js        # Utilitaire de génération de hash bcrypt
-└── tailwind.config.js      # Configuration de Tailwind CSS
+│   └── auth.ts             # Authentication functions and helpers
+├── .env.local              # Environment variables (not versioned)
+├── generate-hash.js        # bcrypt hash generation utility
+└── tailwind.config.js      # Tailwind CSS configuration
 ```
 
-## 🧠 Concepts de sécurité explorés
+## 🧠 Security Concepts Explored
 
-1. **Hachage sécurisé des mots de passe**
-   - Utilisation de bcrypt avec facteur de coût approprié
-   - Stratégies de salage pour prévenir les attaques par tables arc-en-ciel
+1. **Secure Password Hashing**
+   - Using bcrypt with appropriate cost factor
+   - Salting strategies to prevent rainbow table attacks
 
-2. **Protection contre les attaques par force brute**
-   - Limitation des tentatives de connexion par IP
-   - Périodes de blocage progressives après échecs multiples
-   - Suivi des tentatives avec expiration programmée
+2. **Protection Against Brute Force Attacks**
+   - Login attempt limitation by IP
+   - Progressive blocking periods after multiple failures
+   - Attempt tracking with programmed expiration
 
-3. **Gestion sécurisée des sessions**
-   - Tokens aléatoires cryptographiquement sûrs
-   - Cookies à accès restreint (httpOnly, secure, sameSite)
-   - Durée de vie limitée des sessions
+3. **Secure Session Management**
+   - Cryptographically secure random tokens
+   - Restricted access cookies (httpOnly, secure, sameSite)
+   - Limited session lifetime
 
-4. **Bonnes pratiques générales**
-   - Variables d'environnement pour les données sensibles
-   - Validation stricte des entrées utilisateur
-   - Messages d'erreur génériques (sans divulgation d'informations)
+4. **General Best Practices**
+   - Environment variables for sensitive data
+   - Strict user input validation
+   - Generic error messages (without information disclosure)
 
-## 🚀 Pour commencer
+## 🚀 Getting Started
 
-1. Clonez ce dépôt
+1. Clone this repository
    ```bash
    git clone https://github.com/Moha-df/Auth-Security-with-Next.js.git
    cd auth-security-nextjs
    ```
 
-2. Installez les dépendances
+2. Install dependencies
    ```bash
    npm install
    ```
 
-3. Configurez les variables d'environnement
+3. Configure environment variables
    ```bash
    touch .env.local
-   # Éditez .env.local pour configurer le hash de mot de passe
+   # Edit .env.local to configure the password hash
    ```
    
-   Exemple de contenu pour .env.local:
+   Example content for .env.local:
    ```
-   HASHED_PASSWORD=votre_hash_bcrypt_ici
+   HASHED_PASSWORD=your_bcrypt_hash_here
    SALT_ROUNDS=10
    ```
 
-4. Générez un hash de mot de passe (facultatif)
+4. Generate a password hash (optional)
    ```bash
-   node generate-hash.js votre_mot_de_passe
+   node generate-hash.js your_password
    ```
 
-5. Lancez le serveur de développement
+5. Start the development server
    ```bash
    npm run dev
    ```
 
-## ⚠️ Avertissement
+## ⚠️ Warning
 
-Ce projet est conçu à des fins éducatives uniquement. Bien qu'il implémente plusieurs bonnes pratiques de sécurité, une application de production nécessiterait des mesures supplémentaires comme:
+This project is designed for educational purposes only. Although it implements several security best practices, a production application would require additional measures such as:
 
-- Utilisation d'un système de base de données sécurisé pour les utilisateurs
-- Implémentation de l'authentification multifacteur (MFA)
-- Surveillance et journalisation avancées des tentatives suspectes
-- Protection CSRF complète
-- Tests de pénétration réguliers
+- Using a secure database system for users
+- Implementing Multi-Factor Authentication (MFA)
+- Advanced monitoring and logging of suspicious attempts
+- Complete CSRF protection
+- Regular penetration testing
 
-## 📚 Ressources d'apprentissage
+## 📚 Learning Resources
 
-- [Documentation Next.js](https://nextjs.org/docs)
-- [Guide OWASP Top 10](https://owasp.org/www-project-top-ten/)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [OWASP Top 10 Guide](https://owasp.org/www-project-top-ten/)
 - [Next.js Authentication Patterns](https://nextjs.org/docs/authentication)
 - [bcrypt NPM Package](https://www.npmjs.com/package/bcrypt)
 
-## 📝 Licence
+## 📝 License
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+This project is under MIT license. See the [LICENSE](LICENSE) file for more details.
 
 ---
 
-*Créé dans le cadre de mon parcours d'apprentissage de Next.js et de la sécurité web. Les contributions et suggestions sont les bienvenues!*
+*Created as part of my learning journey in Next.js and web security. Contributions and suggestions are welcome!*
