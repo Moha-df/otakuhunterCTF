@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔐 Next.js Security Learning Project
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-13.0+-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-4.9+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![bcrypt](https://img.shields.io/badge/bcrypt-5.1+-525252?style=for-the-badge)
 
-First, run the development server:
+Un projet éducatif pour explorer les concepts de sécurité web et d'authentification avec Next.js. Cette application démontre les pratiques fondamentales de sécurité pour les développeurs React/Next.js.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📋 Vue d'ensemble
+
+Ce projet a été créé pour approfondir ma compréhension de Next.js et des principes essentiels de la sécurité web moderne. L'application implémente un système d'authentification robuste avec plusieurs couches de protection.
+
+### ✨ Fonctionnalités principales
+
+- **Authentification sécurisée** - Système complet basé sur bcrypt et tokens
+- **Protection contre les attaques** - Mécanismes de rate limiting et blocage temporaire 
+- **Gestion sécurisée des sessions** - Utilisation de cookies httpOnly et sameSite
+- **Middleware de protection** - Sécurisation des routes et redirections intelligentes
+- **UI adaptative** - Interface simple et responsive
+
+## 🛠️ Technologies utilisées
+
+- **Next.js** - Framework React pour le rendu côté serveur et les API Routes
+- **TypeScript** - Pour un typage statique et une meilleure maintenabilité
+- **Tailwind CSS** - Pour un styling rapide et responsive
+- **bcrypt** - Pour le hachage sécurisé des mots de passe
+- **crypto** - Pour la génération de tokens d'authentification
+
+## 🏗️ Architecture du projet
+
+```
+password/
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   └── auth/       # Endpoint d'authentification sécurisé
+│   │   ├── accueil/        # Zone protégée de l'application
+│   │   └── login-page.tsx  # Interface de connexion
+│   └── middleware.ts       # Protection des routes et vérification des tokens
+├── utils/
+│   └── auth.ts             # Fonctions et helpers d'authentification
+├── .env.local              # Variables d'environnement (non versionné)
+├── generate-hash.js        # Utilitaire de génération de hash bcrypt
+└── tailwind.config.js      # Configuration de Tailwind CSS
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🧠 Concepts de sécurité explorés
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Hachage sécurisé des mots de passe**
+   - Utilisation de bcrypt avec facteur de coût approprié
+   - Stratégies de salage pour prévenir les attaques par tables arc-en-ciel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Protection contre les attaques par force brute**
+   - Limitation des tentatives de connexion par IP
+   - Périodes de blocage progressives après échecs multiples
+   - Suivi des tentatives avec expiration programmée
 
-## Learn More
+3. **Gestion sécurisée des sessions**
+   - Tokens aléatoires cryptographiquement sûrs
+   - Cookies à accès restreint (httpOnly, secure, sameSite)
+   - Durée de vie limitée des sessions
 
-To learn more about Next.js, take a look at the following resources:
+4. **Bonnes pratiques générales**
+   - Variables d'environnement pour les données sensibles
+   - Validation stricte des entrées utilisateur
+   - Messages d'erreur génériques (sans divulgation d'informations)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Pour commencer
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clonez ce dépôt
+   ```bash
+   git clone https://github.com/Moha-df/Auth-Security-with-Next.js.git
+   cd auth-security-nextjs
+   ```
 
-## Deploy on Vercel
+2. Installez les dépendances
+   ```bash
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Configurez les variables d'environnement
+   ```bash
+   touch .env.local
+   # Éditez .env.local pour configurer le hash de mot de passe
+   ```
+   
+   Exemple de contenu pour .env.local:
+   ```
+   HASHED_PASSWORD=votre_hash_bcrypt_ici
+   SALT_ROUNDS=10
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Générez un hash de mot de passe (facultatif)
+   ```bash
+   node generate-hash.js votre_mot_de_passe
+   ```
+
+5. Lancez le serveur de développement
+   ```bash
+   npm run dev
+   ```
+
+## ⚠️ Avertissement
+
+Ce projet est conçu à des fins éducatives uniquement. Bien qu'il implémente plusieurs bonnes pratiques de sécurité, une application de production nécessiterait des mesures supplémentaires comme:
+
+- Utilisation d'un système de base de données sécurisé pour les utilisateurs
+- Implémentation de l'authentification multifacteur (MFA)
+- Surveillance et journalisation avancées des tentatives suspectes
+- Protection CSRF complète
+- Tests de pénétration réguliers
+
+## 📚 Ressources d'apprentissage
+
+- [Documentation Next.js](https://nextjs.org/docs)
+- [Guide OWASP Top 10](https://owasp.org/www-project-top-ten/)
+- [Next.js Authentication Patterns](https://nextjs.org/docs/authentication)
+- [bcrypt NPM Package](https://www.npmjs.com/package/bcrypt)
+
+## 📝 Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+---
+
+*Créé dans le cadre de mon parcours d'apprentissage de Next.js et de la sécurité web. Les contributions et suggestions sont les bienvenues!*
