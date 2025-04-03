@@ -1,11 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function Accueil() {
   const router = useRouter();
-  const [username, setUsername] = useState('Utilisateur');
 
   // Fonction de déconnexion
   const handleLogout = async () => {
