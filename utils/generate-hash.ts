@@ -16,7 +16,7 @@ async function generateHash() {
     const hash = await bcrypt.hash(password, saltRounds);
     console.log('Mot de passe haché:');
     console.log(hash);
-    console.log('\nAjoutez cette valeur à votre fichier .env.local:');
+    console.log('\nAjoutez cette valeur à votre fichier .env:');
     console.log(`HASHED_PASSWORD=${hash}`);
   } catch (error) {
     console.error('Erreur lors du hachage:', error);

@@ -51,43 +51,43 @@ export async function POST(request: Request) {
 
 
   if (!hashedPassword) {
-    console.error("Erreur: HASHED_PASSWORD n'est pas défini dans les variables d'environnement");
+    console.error("Error: HASHED_PASSWORD is not defined in environment variables");
     return NextResponse.json({ 
       success: false, 
-      message: "Erreur de configuration du serveur" 
+      message: "Error server configuration" 
     }, { status: 500 });
   }
 
-  console.log("Mot de passe reçu:", password);
-  console.log("Hash stocké:", hashedPassword);
+  console.log("Received password:", password);
+  console.log("Stored hash:", hashedPassword);
 
-  // Comparer le mot de passe fourni avec le hash stocké
+  // Compare the provided password with the stored hash
   const passwordMatch = await bcrypt.compare(password, hashedPassword);
 
-  console.log("Résultat de la comparaison:", passwordMatch);
+  console.log("Comparison result:", passwordMatch);
 
   
   if (passwordMatch) {
-    // Réinitialiser les tentatives en cas de succès
+    // Reset attempts in case of success
     loginAttempts.delete(ip);
-    // Générer un token aléatoire sécurisé
+    // Generate a secure random token
     const token = crypto.randomBytes(32).toString('hex');
     
-    // Créer la réponse avec le cookie
+    // Create the response with the cookie
     const response = NextResponse.json({ success: true });
     
-    // Définir le cookie d'authentification
+    // Define the authentication cookie
     response.cookies.set('auth_token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 60 * 60 * 24 // 24 heures
+      maxAge: 60 * 60 * 24 // 24 hours
     });
     
     return response;
   }
   
-  // Incrémenter le compteur de tentatives en cas d'échec
+  // Increment the attempt counter in case of failure
   if (!attemptData) {
     loginAttempts.set(ip, { count: 1, lastAttempt: now });
   } else {
@@ -95,11 +95,11 @@ export async function POST(request: Request) {
     attemptData.lastAttempt = now;
   }
   
-  // Calculer combien de tentatives il reste
+  // Calculate how many attempts are left
   const attemptsLeft = MAX_ATTEMPTS - (loginAttempts.get(ip)?.count || 0);
   
   return NextResponse.json({ 
     success: false, 
-    message: `Mot de passe incorrect. ${attemptsLeft} tentative${attemptsLeft > 1 ? 's' : ''} restante${attemptsLeft > 1 ? 's' : ''}.` 
+    message: `Incorrect password. ${attemptsLeft} attempt${attemptsLeft > 1 ? 's' : ''}.` 
   }, { status: 401 });
 }

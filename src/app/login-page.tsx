@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-
+import AnimatedBackground from './components/AnimatedBackground';
 export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -29,10 +29,10 @@ export default function LoginPage() {
       if (data.success) {
         router.push('/accueil');
       } else {
-        setError(data.message || 'Mot de passe incorrect');
+        setError(data.message || 'Incorrect password');
       }
     } catch (err) {
-      setError('Erreur de connexion au serveur');
+      setError('Error connecting to server');
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -40,9 +40,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-900 to-red-900">
-      <div className="bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-md border-2 border-red-800">
-        <h1 className="text-2xl font-bold text-center mb-6 text-red-500">Entrez le mot de passe</h1>
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-900 to-red-900 relative">
+      <AnimatedBackground />
+      <div className="bg-gray-800 p-8 rounded-lg shadow-xl w-full max-w-md border-2 border-red-800 z-11">
+        <h1 className="text-2xl font-bold text-center mb-6 text-red-500">Enter the password</h1>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
@@ -51,7 +52,7 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-3 border-2 border-red-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent bg-gray-700 text-white"
-              placeholder="Mot de passe"
+              placeholder="password"
               required
             />
           </div>
@@ -67,7 +68,7 @@ export default function LoginPage() {
             disabled={isLoading}
             className={`w-full bg-red-700 text-white py-3 rounded-lg hover:bg-red-800 transition duration-300 font-medium ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
           >
-            {isLoading ? 'Chargement...' : 'Valider'}
+            {isLoading ? 'Loading...' : 'Confirm'}
           </button>
         </form>
       </div>
